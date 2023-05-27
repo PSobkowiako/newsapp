@@ -32,7 +32,7 @@ export default {
 
     axios.get('https://newsapi.org/v2/sources?language=en&apiKey='+ process.env.VUE_APP_NEWS_API_KEY)
         .then(response => {
-
+        console.log(response)
           this.sources = _.sampleSize(response.data.sources, 3)
 
         })
