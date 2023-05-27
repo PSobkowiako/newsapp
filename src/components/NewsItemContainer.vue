@@ -15,7 +15,7 @@ import NewsItem from './NewsItem.vue'
 
 //lodash
 import _ from 'lodash'
-
+import axios from "axios";
 export default {
 
   name: 'news-item-container',
@@ -51,7 +51,7 @@ export default {
 
   created() {
 
-    this.$axios.get('https://newsapi.org/v2/top-headlines?sources='+ this.source.id +'&apiKey='+ process.env.VUE_APP_NEWS_API_KEY)
+    axios.get('https://newsapi.org/v2/top-headlines?sources='+ this.source.id +'&apiKey='+ process.env.VUE_APP_NEWS_API_KEY)
         .then(response => {
 
           this.items = _.sampleSize(response.data.articles, 5)

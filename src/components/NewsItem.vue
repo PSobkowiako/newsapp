@@ -6,17 +6,16 @@
 
     <div class="w-3/4 pl-2 pr-2">
 
-      <div class="text-black font-bold text-l mb-4 mt-2"><a class="no-underline text-black hover:underline" :href="item.url" @click="mark_read" target="_blank">{{ item.title | truncate_text(55) }}</a></div>
+      <div class="text-black font-bold text-l mb-4 mt-2"><a class="no-underline text-black hover:underline" :href="item.url" @click="mark_read" target="_blank">{{ item.title }}</a></div>
 
       <div class="h-24">
         <p class="text-xs text-grey-darker">
-          {{ item.description | truncate_text(100) }}
+          {{ item.description }}
         </p>
       </div>
 
       <div class="flex text-xs mt-4 justify-between items-end text-grey-darker">
-        <div class="w-1/2 flex-1">{{ item.author | truncate_text(20) }}</div>
-        <div class="w-1/2 flex-1 text-right">{{ item.publishedAt | to_date }}</div>
+        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Go to</button>
       </div>
 
     </div>

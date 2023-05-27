@@ -1,3 +1,4 @@
+
 <template>
   <div id="app" class="min-h-screen bg-grey-lighter font-sans">
 
@@ -14,9 +15,7 @@
 
 <script>
 import NewsItemContainer from './components/NewsItemContainer.vue'
-
-
-//lodash
+import axios from "axios";
 import _ from 'lodash'
 
 export default {
@@ -31,7 +30,7 @@ export default {
   },
   created() {
 
-    this.$axios.get('https://newsapi.org/v2/sources?language=en&apiKey='+ process.env.VUE_APP_NEWS_API_KEY)
+    axios.get('https://newsapi.org/v2/sources?language=en&apiKey='+ process.env.VUE_APP_NEWS_API_KEY)
         .then(response => {
 
           this.sources = _.sampleSize(response.data.sources, 3)
