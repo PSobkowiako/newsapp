@@ -100,8 +100,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import _ from "lodash";
+import axios from "axios";
 
 export default {
   name: 'ModalNewsPage',
@@ -114,8 +114,7 @@ export default {
   created() {
     const pathSegments = this.$route.path.split('/');
     const dynamicTitle = pathSegments[pathSegments.length - 1];
-
-    axios.get('https://newsapi.org/v2/everything?q=' + dynamicTitle + '&apiKey=7ef3a4c01aab45539b44f933762f4dd7')
+    axios.get('https://newsapi.org/v2/everything?q=' + dynamicTitle + '&apiKey=af377597375541f0aeae7da7c4cbe834')
         .then(response => {
           console.log(response);
           this.items = _.sampleSize(response.data.articles, 5).map(article => ({
@@ -126,6 +125,7 @@ export default {
 
           }));
         });
+
   }
 }
 </script>

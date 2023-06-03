@@ -22,6 +22,9 @@
               <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">Home</a>
               </li>
+              <li v-for="page in totalPages" :key="page" class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2" :class="[page === currentPage ? 'active' : '']" @click="changePage(page)" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">{{ page }}</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -29,14 +32,14 @@
     </header>
 
     <div class="flex mx-auto items-baseline ml-1 mr-1">
-      <news-item-container v-for="source in sources" :key="source.id" :source="source" />
+      <news-item-container v-for="(pageItems, index) in paginatedItems" :key="index" :items="pageItems" />
     </div>
   </div>
 </template>
 
 <script>
 import NewsItemContainer from '../components/NewsItemContainer.vue'
-import axios from "axios";
+import axios from 'axios'
 import _ from 'lodash'
 
 export default {
@@ -46,14 +49,32 @@ export default {
   },
   data() {
     return {
-      sources: []
+      sources: [],
+      currentPage: 1,
+      itemsPerPage: 15
+    }
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.sources.length / this.itemsPerPage)
+    },
+    paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage
+      const endIndex = startIndex + this.itemsPerPage
+      return _.chunk(this.sources.slice(startIndex, endIndex), 5)
     }
   },
   created() {
-    axios.get('https://newsapi.org/v2/sources?language=en&apiKey=7ef3a4c01aab45539b44f933762f4dd7')
+    axios
+        .get('https://newsapi.org/v2/sources?language=en&apiKey=af377597375541f0aeae7da7c4cbe834')
         .then(response => {
-          this.sources = _.sampleSize(response.data.sources, 3);
+          this.sources = _.sampleSize(response.data.sources, 60);
         })
+  },
+  methods: {
+    changePage(page) {
+      this.currentPage = page
+    }
   }
 }
 </script>
