@@ -66,7 +66,7 @@ export default {
   },
   created() {
     axios
-        .get('https://newsapi.org/v2/sources?language=en&apiKey=a1c428ce812f45ddbe41ce3467c172be')
+        .get('https://newsapi.org/v2/sources?language=en&apiKey=9726239ec43842188fab07d3bf7778ff')
         .then(response => {
           this.sources = _.sampleSize(response.data.sources, 60);
         })
