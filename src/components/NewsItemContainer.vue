@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/3 sm:w-full p-3 m-4 border-grey-light border-2 rounded-lg bg-white shadow">
+  <div class="lg:w-1/3 sm:w-full p-3 m-4 border-grey-light border-2 rounded-lg bg-white shadow">
     <h2 class="uppercase text-base text-center tracking-wide border-b-2 pb-2 border-grey-light">
       {{ items[0] && items[0].source ? items[0].source.name : '' }}
     </h2>

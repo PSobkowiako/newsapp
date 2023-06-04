@@ -25,7 +25,7 @@ export default {
   name: 'news-item',
   props: ['item'],
   created() {
-    axios.get('https://newsapi.org/v2/top-headlines?sources=' + this.item.id + '&apiKey=9726239ec43842188fab07d3bf7778ff')
+    axios.get('https://newsapi.org/v2/top-headlines?sources=' + this.item.id + '&apiKey=445f76b1806a4ff7b3133ed6649bd509')
         .then(response => {
           console.log(response);
           this.localItems = _.sampleSize(response.data.articles, 1).map(article => ({

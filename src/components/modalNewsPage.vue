@@ -113,7 +113,7 @@ export default {
   },
   created() {
     const pathSegments = this.$route.path.split('/');
-    axios.get('https://newsapi.org/v2/top-headlines?sources=' + pathSegments + '&apiKey=9726239ec43842188fab07d3bf7778ff')
+    axios.get('https://newsapi.org/v2/top-headlines?sources=' + pathSegments + '&apiKey=445f76b1806a4ff7b3133ed6649bd509')
         .then(response => {
           console.log(response);
           this.items = _.sampleSize(response.data.articles, 5).map(article => ({
