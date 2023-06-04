@@ -9,7 +9,7 @@ import modal from './components/modalNewsPage.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/news', component: home },
+        { path: '/', component: home },
         { path: '/modal/:title', component: modal},
     ]
 });

@@ -2,7 +2,7 @@
   <div>
     <header>
       <!-- Navigation bar -->
-      <nav class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start" data-te-navbar-ref>
+      <nav class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200" data-te-navbar-ref>
         <div class="flex w-full flex-wrap items-center justify-between px-3">
           <div class="flex items-center">
             <!-- Hamburger menu button -->
@@ -31,7 +31,7 @@
       </nav>
     </header>
 
-    <div class="flex mx-auto items-baseline ml-1 mr-1">
+    <div class="flex mx-auto items-baseline ml-1 mr-1 md: items-baseline ml-1 mr-1">
       <news-item-container v-for="(pageItems, index) in paginatedItems" :key="index" :items="pageItems" />
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
   },
   created() {
     axios
-        .get('https://newsapi.org/v2/sources?language=en&apiKey=af377597375541f0aeae7da7c4cbe834')
+        .get('https://newsapi.org/v2/sources?language=en&apiKey=a1c428ce812f45ddbe41ce3467c172be')
         .then(response => {
           this.sources = _.sampleSize(response.data.sources, 60);
         })

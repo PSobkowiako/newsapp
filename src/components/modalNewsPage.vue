@@ -113,8 +113,7 @@ export default {
   },
   created() {
     const pathSegments = this.$route.path.split('/');
-    const dynamicTitle = pathSegments[pathSegments.length - 1];
-    axios.get('https://newsapi.org/v2/everything?q=' + dynamicTitle + '&apiKey=af377597375541f0aeae7da7c4cbe834')
+    axios.get('https://newsapi.org/v2/top-headlines?sources=' + pathSegments + '&apiKey=a1c428ce812f45ddbe41ce3467c172be')
         .then(response => {
           console.log(response);
           this.items = _.sampleSize(response.data.articles, 5).map(article => ({

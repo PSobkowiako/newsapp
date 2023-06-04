@@ -11,7 +11,7 @@
           {{ item.description }}
         </p>
       </div>
-      <router-link :to="{ path: '/modal/' + item.title }">Go to</router-link>
+      <router-link :to="{ path: '/modal/' + item.id }">Go to</router-link>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   name: 'news-item',
   props: ['item'],
   created() {
-    axios.get('https://newsapi.org/v2/top-headlines?sources=' + this.item.id + '&apiKey=af377597375541f0aeae7da7c4cbe834')
+    axios.get('https://newsapi.org/v2/top-headlines?sources=' + this.item.id + '&apiKey=a1c428ce812f45ddbe41ce3467c172be')
         .then(response => {
           console.log(response);
           this.localItems = _.sampleSize(response.data.articles, 1).map(article => ({
