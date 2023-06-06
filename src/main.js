@@ -10,9 +10,10 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: home },
-        { path: '/modal/:title', component: modal},
+        { path: '/modal/:title', component: modal },
     ]
 });
+
 
 const app = createApp(App);
 app.use(router);

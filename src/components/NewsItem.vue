@@ -1,60 +1,55 @@
 <template>
-  <div class="w-full rounded-lg h-48 border border-grey-light mt-6 flex">
-    <div v-for="item in localItems" :key="item.title" class="w-1/4 h-48 overflow-hidden bg-cover rounded-l-lg -my-px border-r-4 border-blue-dark" :style="'background-image: url('+ item.urlImage +')'">
+  <div v-for="cosie in localItems2" :key="cosie.title" class="w-full rounded-lg h-48 border border-grey-light mt-6 flex">
+    <div class="w-1/4 h-48 overflow-hidden bg-cover rounded-l-lg -my-px border-r-4 border-blue-dark" :style="'background-image: url('+ cosie.image +')'">
     </div>
     <div class="w-3/4 pl-2 pr-2">
       <div class="text-black font-bold text-l mb-4 mt-2">
-        <a v-for="item in localItems" :key="item.title" class="no-underline text-black hover:underline">{{ item.title }}</a>
+        <a class="no-underline text-black hover:underline">{{ cosie.title }}</a>
       </div>
       <div class="h-24">
-        <p v-for="item in localItems" :key="item.title" class="text-xs text-grey-darker">
-          {{ item.description }}
+        <p class="text-xs text-grey-darker">
+          {{ shortenText(cosie.body) }}
         </p>
-      </div>
-      <router-link :to="{ path: '/modal/' + item.id }">Go to</router-link>
+      </div >
+      <router-link :to="{ path: '/modal/' + cosie.uri }">Go to</router-link>
     </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
 import axios from "axios";
 import _ from "lodash";
 
 export default {
   name: 'news-item',
   props: ['item'],
+
   created() {
-    axios.get('https://newsapi.org/v2/top-headlines?sources=' + this.item.id + '&apiKey=445f76b1806a4ff7b3133ed6649bd509')
+    const articles = {
+      "action": "getArticle",
+      "articleUri": this.item.uri,
+      "infoArticleBodyLen": -1,
+      "resultType": "info",
+      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
+    };
+
+    axios.post('http://eventregistry.org/api/v1/article/getArticle', articles)
         .then(response => {
           console.log(response);
-          this.localItems = _.sampleSize(response.data.articles, 1).map(article => ({
-            title: article.title,
-            description: article.description,
-            urlImage: article.urlToImage,
-            author: article.author,
-
-          }));
+          this.localItems2 = _.sampleSize(response.data[this.item.uri], 1);
         });
-    console.log(this.item.description)
-    console.log(this.item.id)
   },
   data() {
     return {
       is_read: false,
-      localItems: [],
+      localItems2: [],
     }
   },
-
-  methods: {},
-  filters: {
-    to_date(timestamp) {
-      return moment(timestamp).format('D/MMM/YYYY, h:mma')
-    },
-    truncate_text(text, len) {
-      return text.slice(0, len) + (text.length > len ? '...' : '')
+  methods: {
+    shortenText(text) {
+      return text.length > 50 ? text.slice(0, 250) + "..." : text;
     }
-  }
+  },
 }
 </script>
 

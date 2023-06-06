@@ -6,20 +6,20 @@
         <div class="flex w-full flex-wrap items-center justify-between px-3">
 
           <!-- Navigation links -->
-            <ul class="mr-auto flex mr-2 flex-row" data-te-navbar-nav-ref>
-              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white p-2 [&.active]:text-black/90" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">Home</a>
-              </li>
-              <li v-for="page in totalPages" :key="page" class="mb-4 mb-0 pr-2" data-te-nav-item-ref>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white p-2" :class="[page === currentPage ? 'active' : '']" @click="changePage(page)" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">{{ page }}</a>
-              </li>
-            </ul>
+          <ul class="mr-auto flex mr-2 flex-row" data-te-navbar-nav-ref>
+            <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white p-2 [&.active]:text-black/90" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">Home</a>
+            </li>
+            <li v-for="page in totalPages" :key="page" class="mb-4 mb-0 pr-2" data-te-nav-item-ref>
+              <a class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white p-2" :class="[page === currentPage ? 'active' : '']" @click="changePage(page)" href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light">{{ page }}</a>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
 
     <div class="mx-auto items-baseline ml-1 mr-1 lg:flex">
-      <news-item-container v-for="(pageItems, index) in paginatedItems" :key="index" :items="pageItems" />
+      <NewsItemContainer v-for="(pageItems, index) in paginatedItems" :key="index" :items="pageItems" />
     </div>
   </div>
 </template>
@@ -52,10 +52,19 @@ export default {
     }
   },
   created() {
+    const articles = {
+      "uri": "240f6a12-b9d8-40a6-b1c6-a220e31d08de",
+      "infoArticleBodyLen": -1,
+      "resultType": "articles",
+      "articlesSortBy": "fq",
+      "articlesCount": 60,
+      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
+    }
     axios
-        .get('https://newsapi.org/v2/sources?language=en&apiKey=445f76b1806a4ff7b3133ed6649bd509')
+        .post('https://eventregistry.org/api/v1/article/getArticlesForTopicPage', articles)
         .then(response => {
-          this.sources = _.sampleSize(response.data.sources, 60);
+          this.sources = response.data.articles.results
+          console.log(this.sources)
         })
   },
   methods: {
