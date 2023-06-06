@@ -33,7 +33,7 @@ export default {
       "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
     };
 
-    axios.post('http://eventregistry.org/api/v1/article/getArticle', articles)
+    axios.post('https://eventregistry.org/api/v1/article/getArticle', articles)
         .then(response => {
           console.log(response);
           this.localItems2 = _.sampleSize(response.data[this.item.uri], 1);
