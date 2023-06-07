@@ -17,7 +17,6 @@
         </div>
       </nav>
     </header>
-
     <div class="mx-auto items-baseline ml-1 mr-1 lg:flex">
       <NewsItemContainer v-for="(pageItems, index) in paginatedItems" :key="index" :items="pageItems" />
     </div>

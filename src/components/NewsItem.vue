@@ -1,17 +1,17 @@
 <template>
-  <div v-for="cosie in localItems2" :key="cosie.title" class="w-full rounded-lg h-48 border border-grey-light mt-6 flex">
-    <div class="w-1/4 h-48 overflow-hidden bg-cover rounded-l-lg -my-px border-r-4 border-blue-dark" :style="'background-image: url('+ cosie.image +')'">
+  <div v-for="item in localItems2" :key="item.title" class="w-full rounded-lg h-48 border border-grey-light mt-6 flex">
+    <div class="w-1/4 h-48 overflow-hidden bg-cover rounded-l-lg -my-px border-r-4 border-blue-dark" :style="'background-image: url('+ item.image +')'">
     </div>
     <div class="w-3/4 pl-2 pr-2">
       <div class="text-black font-bold text-l mb-4 mt-2">
-        <a class="no-underline text-black hover:underline">{{ cosie.title }}</a>
+        <a class="no-underline text-black hover:underline">{{ item.title }}</a>
       </div>
       <div class="h-24">
         <p class="text-xs text-grey-darker">
-          {{ shortenText(cosie.body) }}
+          {{ shortenText(item.body) }}
         </p>
       </div >
-      <router-link :to="{ path: '/modal/' + cosie.uri }">Go to</router-link>
+      <router-link :to="{ path: '/modal/' +item.uri}">Go to</router-link>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     shortenText(text) {
-      return text.length > 50 ? text.slice(0, 250) + "..." : text;
+      return text.length > 50 ? text.slice(0, 200) + "..." : text;
     }
   },
 }

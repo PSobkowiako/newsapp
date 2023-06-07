@@ -1,4 +1,3 @@
-
 <template>
   <header>
     <!-- Navigation bar -->
@@ -71,10 +70,10 @@
   </header>
   <div v-for="item in localItems2" :key="item.title"  class="container my-24 px-6 mx-auto">
     <section class="mb-32 text-gray-800 text-center">
-      <div class="flex flex-wrap justify-center mb-12">
+      <div class="flex flex-wrap justify-center mb-12 ">
         <div class="grow-0 shrink-0 basis-auto w-full md:w-10/12 px-3">
           <div class="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg mb-6 rounded-lg"
-              data-mdb-ripple="true" data-mdb-ripple-color="light">
+               data-mdb-ripple="true" data-mdb-ripple-color="light">
             <img :src="item.image" alt="Article Image" class="w-full" />
             <a href="#!">
               <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
@@ -87,12 +86,13 @@
           <h5 class="text-lg font-bold mb-3">{{item.title}}</h5>
           <p class="text-gray-500 mb-4">
             <small>Published <u></u> by
-              <a href="" class="text-gray-900">{{item.author}}</a></small>
+              <a href="" class="text-gray-900">{{item.source.title}}</a></small>
           </p>
           <p class="mb-6">{{item.body}}</p>
           <a data-mdb-ripple="true" data-mdb-ripple-color="light"
              class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-             href="" role="button">Read more</a>
+             :href="item.url" role="button">Read more</a>
+
         </div>
       </div>
     </section>
@@ -104,7 +104,7 @@ import axios from "axios";
 import _ from "lodash";
 
 export default {
-  name: 'ModalNewsPage',
+  name: 'modal-mews-page',
   props: ['item'],
   data() {
     return {
@@ -113,9 +113,12 @@ export default {
   },
   created() {
     const pathSegments = this.$route.path.split('/');
+    const slicedSegments = pathSegments.slice(1);
+    const slicedSegments2 = slicedSegments.slice(1);
+    const text = slicedSegments2.toString();
     const articles = {
       "action": "getArticle",
-      "articleUri": pathSegments,
+      "articleUri": text,
       "infoArticleBodyLen": -1,
       "resultType": "info",
       "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
@@ -123,8 +126,7 @@ export default {
 
     axios.post('https://eventregistry.org/api/v1/article/getArticle', articles)
         .then(response => {
-          console.log(response);
-          this.localItems2 = _.sampleSize(response.data[pathSegments], 1);
+          this.localItems2 = _.sampleSize(response.data[text], 1);
         });
   },
 }
