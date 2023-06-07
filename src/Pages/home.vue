@@ -52,15 +52,23 @@ export default {
   },
   created() {
     const articles = {
-      "uri": "240f6a12-b9d8-40a6-b1c6-a220e31d08de",
-      "infoArticleBodyLen": -1,
-      "resultType": "articles",
-      "articlesSortBy": "fq",
+      "action": "getArticles",
+      "keyword": "games",
+      "articlesPage": 1,
       "articlesCount": 60,
-      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
+      "articlesSortBy": "date",
+      "articlesSortByAsc": false,
+      "articlesArticleBodyLen": -1,
+      "resultType": "articles",
+      "dataType": [
+        "news",
+        "pr"
+      ],
+      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac",
+      "forceMaxDataTimeWindow": 31
     }
     axios
-        .post('https://eventregistry.org/api/v1/article/getArticlesForTopicPage', articles)
+        .post('https://eventregistry.org/api/v1/article/getArticles ', articles)
         .then(response => {
           this.sources = response.data.articles.results
           console.log(this.sources)
