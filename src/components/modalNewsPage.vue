@@ -124,7 +124,7 @@ export default {
       "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
     };
 
-    axios.post('https://eventregistry.org/api/v1/article/getArticle', articles)
+    axios.post('38df1f02-a6bb-41c2-9b7a-b383b5864e7c', articles)
         .then(response => {
           this.localItems2 = _.sampleSize(response.data[text], 1);
         });

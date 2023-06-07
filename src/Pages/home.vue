@@ -64,7 +64,7 @@ export default {
         "news",
         "pr"
       ],
-      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac",
+      "apiKey": "38df1f02-a6bb-41c2-9b7a-b383b5864e7c",
       "forceMaxDataTimeWindow": 31
     }
     axios

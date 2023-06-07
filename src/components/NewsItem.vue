@@ -30,7 +30,7 @@ export default {
       "articleUri": this.item.uri,
       "infoArticleBodyLen": -1,
       "resultType": "info",
-      "apiKey": "06f9f3e8-ed59-4ecb-a160-2b39600e33ac"
+      "apiKey": "38df1f02-a6bb-41c2-9b7a-b383b5864e7c"
     };
 
     axios.post('https://eventregistry.org/api/v1/article/getArticle', articles)
