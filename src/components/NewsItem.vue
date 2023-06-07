@@ -1,5 +1,5 @@
 <template>
-  <div v-for="item in localItems2" :key="item.title" class="w-full rounded-lg h-48 border border-grey-light mt-6 flex">
+  <div v-for="item in localItems2" :key="item.title" class="w-full rounded-lg lg:h-48 h-65 border border-grey-light mt-6 flex">
     <div class="w-1/4 h-48 overflow-hidden bg-cover rounded-l-lg -my-px border-r-4 border-blue-dark" :style="'background-image: url('+ item.image +')'">
     </div>
     <div class="w-3/4 pl-2 pr-2">
