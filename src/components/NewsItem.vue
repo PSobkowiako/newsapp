@@ -38,6 +38,7 @@ export default {
           console.log(response);
           this.localItems2 = _.sampleSize(response.data[this.item.uri], 1);
         });
+    console.log(this.item.uri)
   },
   data() {
     return {
